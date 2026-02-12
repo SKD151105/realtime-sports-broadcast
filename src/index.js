@@ -8,14 +8,24 @@ import { logger } from "./utils/logger.js";
 const app = express();
 const PORT = Number(process.env.PORT || 8000);
 
-const configuredCorsOrigin = process.env.CORS_ORIGIN;
+const normalizeOrigin = (value) => String(value || "").trim().replace(/\/+$/g, "");
+
+const configuredCorsOriginsRaw =
+    process.env.CORS_ORIGINS || process.env.CORS_ORIGIN || "";
+const configuredCorsOrigins = new Set(
+    configuredCorsOriginsRaw
+        .split(",")
+        .map((s) => normalizeOrigin(s))
+        .filter(Boolean),
+);
 
 app.use(
     cors({
         origin(origin, callback) {
             if (!origin) return callback(null, true);
-            if (configuredCorsOrigin) {
-                return callback(null, origin === configuredCorsOrigin);
+            if (configuredCorsOrigins.size > 0) {
+                const normalized = normalizeOrigin(origin);
+                return callback(null, configuredCorsOrigins.has(normalized));
             }
 
             // Dev default: allow any localhost/127.0.0.1 port (Vite uses 5173 by default)

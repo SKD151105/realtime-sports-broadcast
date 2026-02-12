@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "ES2022",
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
@@ -10,6 +11,7 @@
       "DOM.Iterable"
     ],
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "types": [
       "node"
     ],

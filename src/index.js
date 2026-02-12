@@ -6,7 +6,7 @@ import { attachWebSocketServer } from "./ws/server.js";
 import { logger } from "./utils/logger.js";
 
 const app = express();
-const PORT = 8000;
+const PORT = Number(process.env.PORT || 8000);
 
 const configuredCorsOrigin = process.env.CORS_ORIGIN;
 
@@ -57,7 +57,7 @@ app.use((err, _req, res, _next) => {
 });
 
 const server = app.listen(PORT, () => {
-    logger.info("Server listening", { url: `http://localhost:${PORT}` });
+    logger.info("Server listening", { port: PORT });
 });
 
 // Enable WebSocket upgrades on /ws

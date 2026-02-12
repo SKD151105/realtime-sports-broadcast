@@ -11,6 +11,10 @@
   ],
   "rewrites": [
     {
+      "source": "/assets/(.*)",
+      "destination": "/sportz-frontend/assets/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/sportz-frontend/index.html"
     }

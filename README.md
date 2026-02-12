@@ -26,6 +26,30 @@ On localhost, WebSocket round-trip time (RTT) is typically sub-millisecond. Usin
 
 These numbers are specific to local development (client and server on the same machine). Over Wi-Fi/LAN or a hosted environment, you should expect higher RTT.
 
+## Performance notes
+
+### Frontend (real-user experience)
+
+Vercel Speed Insights is enabled on the frontend and reports real-user Core Web Vitals (LCP/INP/CLS/TTFB) over time.
+
+### Backend (load test snapshot)
+
+HTTP load test executed against the deployed Render backend:
+
+```bash
+npx autocannon -c 50 -a 1000 https://realtime-sports-broadcast.onrender.com/matches?limit=10
+```
+
+Results (1000 requests, 50 concurrent connections):
+
+- Throughput: ~71 req/sec average (1000 requests completed in ~14.2s)
+- Latency: p50 ~511ms, avg ~617ms, p97.5 ~1.43s, p99 ~1.76s, max ~2.17s
+
+Notes:
+
+- This is a point-in-time snapshot and depends heavily on hosting tier, region, and database latency.
+- On free tiers, cold starts and resource limits can increase tail latency.
+
 ## Project structure
 
 ```text

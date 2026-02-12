@@ -1,40 +1,39 @@
-import { eq } from "drizzle-orm";
-import { db, pool } from "./db/db.js";
-import { demoUsers } from "./db/schema.js";
+import express from "express";
+import { matchesRouter } from "./routes/matches.js";
+import { pool } from "./db/db.js";
 
-async function main() {
+const app = express();
+const PORT = 8000;
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+    res.json({ message: "Realtime Sports Broadcast API is running." });
+});
+
+app.get("/healthcheck/db", async (_req, res) => {
     try {
-        console.log("Running CRUD demo");
-
-        const [user] = await db
-            .insert(demoUsers)
-            .values({ name: "Admin", email: "admin@example.com" })
-            .returning();
-
-        console.log("CREATE:", user);
-
-        const found = await db
-            .select()
-            .from(demoUsers)
-            .where(eq(demoUsers.id, user.id));
-
-        console.log("READ:", found[0]);
-
-        const [updated] = await db
-            .update(demoUsers)
-            .set({ name: "Super Admin" })
-            .where(eq(demoUsers.id, user.id))
-            .returning();
-
-        console.log("UPDATE:", updated);
-
-        await db.delete(demoUsers).where(eq(demoUsers.id, user.id));
-        console.log("DELETE: user removed");
-    } finally {
-        if (pool) {
-            await pool.end();
-        }
+        await pool.query("select 1 as ok");
+        res.status(200).json({ status: "ok", db: "ok" });
+    } catch (error) {
+        console.error("DB healthcheck failed");
+        res.status(503).json({ status: "degraded", db: "down" });
     }
-}
+});
 
-main();
+app.use("/matches", matchesRouter);
+
+// Return JSON for invalid JSON bodies (instead of Express default HTML error page)
+app.use((err, _req, res, _next) => {
+    const isJsonSyntaxError = err instanceof SyntaxError && "body" in err;
+    if (isJsonSyntaxError) {
+        return res.status(400).json({ error: "Invalid JSON body" });
+    }
+
+    const status = err?.statusCode || err?.status || 500;
+    return res.status(status).json({ error: err?.message || "Internal server error" });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`);
+});

@@ -1,0 +1,126 @@
+{
+  "matches": [
+    {
+      "id": 101,
+      "sport": "football",
+      "homeTeam": "Manchester City",
+      "awayTeam": "JSM United",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "id": 102,
+      "sport": "cricket",
+      "homeTeam": "India",
+      "awayTeam": "England",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "id": 103,
+      "sport": "cricket",
+      "homeTeam": "Pakistan",
+      "awayTeam": "Bangladesh",
+      "homeScore": 0,
+      "awayScore": 0
+    }
+  ],
+  "feed": [
+    {
+      "matchId": 101,
+      "minute": 1,
+      "sequence": 1,
+      "period": "H1",
+      "eventType": "kickoff",
+      "actor": "Referee",
+      "team": "",
+      "message": "Kick-off",
+      "metadata": {},
+      "tags": ["kickoff"]
+    },
+    {
+      "matchId": 101,
+      "minute": 7,
+      "sequence": 2,
+      "period": "H1",
+      "eventType": "chance",
+      "actor": "Forward",
+      "team": "Manchester City",
+      "message": "Early chance created by Manchester City",
+      "metadata": { "xg": 0.18 },
+      "tags": ["attack"]
+    },
+    {
+      "matchId": 101,
+      "minute": 13,
+      "sequence": 3,
+      "period": "H1",
+      "eventType": "save",
+      "actor": "Goalkeeper",
+      "team": "JSM United",
+      "message": "Big save keeps it level",
+      "metadata": {},
+      "tags": ["defense"]
+    },
+    {
+      "matchId": 102,
+      "minute": 1,
+      "sequence": 1,
+      "period": "1st",
+      "eventType": "start",
+      "actor": "Umpire",
+      "team": "neutral",
+      "message": "Match begins",
+      "metadata": {},
+      "tags": ["start"]
+    },
+    {
+      "matchId": 102,
+      "minute": 4,
+      "sequence": 2,
+      "period": "1st",
+      "eventType": "run",
+      "actor": "Batter",
+      "team": "India",
+      "message": "Quick single taken (India)",
+      "metadata": { "runs": 1 },
+      "tags": ["run"]
+    },
+    {
+      "matchId": 102,
+      "minute": 6,
+      "sequence": 3,
+      "period": "1st",
+      "eventType": "four",
+      "actor": "Batter",
+      "team": "India",
+      "message": "Cracking boundary through covers (India)",
+      "metadata": { "runs": 4 },
+      "tags": ["boundary"]
+    },
+    {
+      "matchId": 103,
+      "minute": 1,
+      "sequence": 1,
+      "period": "1st",
+      "eventType": "start",
+      "actor": "Umpire",
+      "team": "neutral",
+      "message": "Play gets underway",
+      "metadata": {},
+      "tags": ["start"]
+    },
+    {
+      "matchId": 103,
+      "minute": 3,
+      "sequence": 2,
+      "period": "1st",
+      "eventType": "six",
+      "actor": "Batter",
+      "team": "Pakistan",
+      "message": "Huge hit into the stands (Pakistan)",
+      "metadata": { "runs": 6 },
+      "tags": ["six"]
+    }
+  ]
+}

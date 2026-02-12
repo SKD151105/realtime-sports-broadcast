@@ -7,6 +7,14 @@
     "test": "node --test",
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
+    "ws:latency": "node scripts/ws-latency.js --",
+    "fe:install": "npm --prefix sportz-frontend install",
+    "fe:dev": "npm --prefix sportz-frontend run dev",
+    "fe:build": "npm --prefix sportz-frontend run build",
+    "fe:preview": "npm --prefix sportz-frontend run preview",
+    "seed": "node src/seed/seed.js",
+    "seed:live": "node src/seed/run-live.js",
+    "seed:recap": "node src/seed/run-recap.js",
     "db:check": "node src/db/check.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
@@ -24,10 +32,12 @@
   },
   "homepage": "https://github.com/SKD151105/realtime-sports-broadcast#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.4",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",
     "pg": "^8.18.0",
+    "ws": "^8.19.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {

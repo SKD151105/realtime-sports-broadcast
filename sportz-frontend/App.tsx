@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { useMatchData } from './hooks/useMatchData';
 import { MatchCard } from './components/MatchCard';
 import { LiveFeed } from './components/LiveFeed';
@@ -169,6 +170,8 @@ const App: React.FC = () => {
           </aside>
         </div>
       </div>
+
+      <SpeedInsights />
     </div>
   );
 };

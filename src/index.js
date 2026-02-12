@@ -1,4 +1,3 @@
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import express from "express";
 import cors from "cors";
 import { matchRouter } from "./routes/match.js";
